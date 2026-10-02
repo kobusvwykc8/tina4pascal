@@ -13,6 +13,8 @@ website/
   index.html              landing page (hero, features, examples, IDE teaser)
   ide/
     index.html            IDE ideation page — the write-up + mockup gallery
+    mockups/              <-- DROP ANDRE'S CLAUDE-GENERATED IDE MOCKUPS HERE
+                              (images AND HTML, kept in context next to the page)
   css/
     styles.css            design tokens + base styles (light/dark)
   js/
@@ -21,18 +23,20 @@ website/
     tina4pascal-logo.svg  brand logo (copied from /branding)
     tina4pascal-logo.png
     tina4-robot-avatar.svg
-    ide-mockups/          <-- DROP ANDRE'S CLAUDE-GENERATED IDE MOCKUPS HERE
 ```
 
 ## The IDE ideation space
 
 Andre asked for ideation around a **Tina4Pascal IDE**. The dedicated page is
 [`ide/index.html`](ide/index.html) and it already has a labelled gallery section
-reserved for the mockups. To add them:
+reserved for the mockups. The mockups — **images and HTML** — live in context
+next to the page in [`ide/mockups/`](ide/mockups/), not in the general `images/`
+folder. To add them:
 
-1. Drop the mockup image files into [`images/ide-mockups/`](images/ide-mockups/).
-2. In `ide/index.html`, uncomment / fill the `<!-- MOCKUP SLOT -->` figures with
-   the real filenames and captions.
+1. Drop the mockup files (images and/or HTML) into [`ide/mockups/`](ide/mockups/).
+2. In `ide/index.html`, uncomment / fill the `<!-- MOCKUP SLOT -->` entries —
+   `<figure><img src="mockups/…">` for an image, or an `<iframe>`/link to
+   `mockups/…` for an HTML mockup (both examples are in the file).
 
 Nothing in the gallery is final — it's a frame to drop the generated mockups
 into so we can arrange and annotate them.
