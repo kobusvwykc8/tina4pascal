@@ -1,5 +1,7 @@
 // Tina4Pascal website — progressive enhancement.
-// The site works with no JS; this adds the parallax hero motion.
+// The site works with no JS; this adds the scroll-driven parallax hero
+// (Firewatch-style): as you scroll into the scene, layers behind a focal plane
+// lag (hang back) and layers in front rush past, opening up the depth.
 
 (function () {
   "use strict";
@@ -12,7 +14,7 @@
     }
   } catch (e) { /* no-op */ }
 
-  // ---- parallax hero ----
+  // ---- scroll parallax hero ----
   var stage = document.getElementById("phero-stage");
   if (!stage) return;
   var layers = Array.prototype.slice.call(stage.querySelectorAll(".player"));
@@ -22,9 +24,12 @@
   try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
   if (reduce) return; // honour reduced-motion: leave layers static
 
-  var SCROLL_K = 0.18;  // how far layers drift as the hero scrolls away
-  var MOUSE_K  = 90;    // px of mouse-driven sway for the nearest layer
-  var mx = 0, my = 0, sy = window.scrollY || window.pageYOffset || 0;
+  // Layers at depth == PIVOT scroll naturally; those behind it (smaller depth)
+  // lag downward so they stay in view longer, those in front (larger depth) move
+  // up faster and leave first — that differential is the parallax.
+  var PIVOT = 0.16;
+  var K = 0.34;      // overall strength
+  var sy = window.scrollY || window.pageYOffset || 0;
   var ticking = false;
 
   function apply() {
@@ -32,21 +37,14 @@
     for (var i = 0; i < layers.length; i++) {
       var el = layers[i];
       var d = parseFloat(el.getAttribute("data-depth")) || 0;
-      var tx = mx * d * MOUSE_K;
-      var ty = (-sy * d * SCROLL_K) + (my * d * MOUSE_K);
-      el.style.transform =
-        "translate3d(calc(-50% + " + tx.toFixed(1) + "px), calc(-50% + " + ty.toFixed(1) + "px), 0)";
+      var ty = sy * (PIVOT - d) * K;   // >0 = lag down (background), <0 = rush up (foreground)
+      el.style.transform = "translate3d(-50%, calc(-50% + " + ty.toFixed(1) + "px), 0)";
     }
   }
   function req() { if (!ticking) { ticking = true; requestAnimationFrame(apply); } }
 
   window.addEventListener("scroll", function () {
-    sy = window.scrollY || window.pageYOffset || 0; req();
-  }, { passive: true });
-
-  window.addEventListener("mousemove", function (e) {
-    mx = (e.clientX / window.innerWidth) - 0.5;
-    my = (e.clientY / window.innerHeight) - 0.5;
+    sy = window.scrollY || window.pageYOffset || 0;
     req();
   }, { passive: true });
 
