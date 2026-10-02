@@ -104,13 +104,13 @@ footer.site { border-top: 1px solid var(--border); padding: 30px 0; color: var(-
 
 /* ---- parallax hero ------------------------------------------------------ */
 .phero {
-  position: relative; height: 100vh; min-height: 620px; max-height: 1040px;
+  position: relative; height: 100vh; min-height: 620px;
   overflow: hidden; background: #0b0710; isolation: isolate;
 }
 .phero-stage { position: absolute; inset: 0; z-index: 0; }
 /* layers are oversized + centred so parallax movement never exposes an edge */
 .phero .player {
-  position: absolute; top: 50%; left: 50%; width: 130%; height: 130%;
+  position: absolute; top: 50%; left: 50%; width: 155%; height: 155%;
   object-fit: cover; transform: translate3d(-50%, -50%, 0); will-change: transform;
   pointer-events: none; user-select: none;
 }

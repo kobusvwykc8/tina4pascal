@@ -28,7 +28,7 @@
   // lag downward so they stay in view longer, those in front (larger depth) move
   // up faster and leave first — that differential is the parallax.
   var PIVOT = 0.16;
-  var K = 0.34;      // overall strength
+  var K = 0.62;      // overall strength (higher = more pronounced depth)
   var sy = window.scrollY || window.pageYOffset || 0;
   var ticking = false;
 
