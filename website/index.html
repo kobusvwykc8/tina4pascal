@@ -26,19 +26,33 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="wrap">
-        <h1>Native apps, written in HTML.</h1>
-        <p class="lead">
-          <!-- TODO: finalise the one-liner. From the README: -->
-          HTML-driven native apps in Free Pascal — one codebase, six targets,
-          no browser, no widget toolkit.
-        </p>
-        <p>
-          <a class="btn" href="https://github.com/tina4stack/tina4pascal">Get started</a>
-          <a class="btn ghost" href="#examples">See examples</a>
+    <!-- PARALLAX HERO: 7 depth layers (sunset savanna) move at different rates on
+         scroll + mouse. Layers 00 (far sky) → 06 (near foreground) sit behind the
+         copy; the dark centre keeps the headline legible. -->
+    <section class="phero">
+      <div class="phero-stage" id="phero-stage" aria-hidden="true">
+        <img class="player" data-depth="0.00" src="images/Parallax%20-%2000.png" alt="">
+        <img class="player" data-depth="0.05" src="images/Parallax%20-%2001.png" alt="">
+        <img class="player" data-depth="0.10" src="images/Parallax%20-%2002.png" alt="">
+        <img class="player" data-depth="0.16" src="images/Parallax%20-%2003.png" alt="">
+        <img class="player" data-depth="0.23" src="images/Parallax%20-%2004.png" alt="">
+        <img class="player" data-depth="0.31" src="images/Parallax%20-%2005.png" alt="">
+        <img class="player" data-depth="0.42" src="images/Parallax%20-%2006.png" alt="">
+      </div>
+
+      <div class="phero-copy">
+        <img class="phero-logo" src="images/tina4pascal-logo.svg" alt="Tina4Pascal">
+        <h1>Native apps, written in <span class="hl">HTML</span>.</h1>
+        <p class="lead">One codebase, six targets — no browser, no widget toolkit. Pure Free Pascal.</p>
+        <p class="cta">
+          <a class="btn btn-magenta" href="https://github.com/tina4stack/tina4pascal">Get started</a>
+          <a class="btn btn-glass" href="#examples">See examples</a>
         </p>
       </div>
+
+      <ul class="phero-rail" aria-hidden="true">
+        <li>Simple</li><li>Powerful</li><li>Productive</li><li>Cross-platform</li>
+      </ul>
     </section>
 
     <section id="features">

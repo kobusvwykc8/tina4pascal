@@ -101,3 +101,55 @@ section .sub { color: var(--muted); margin: 0 0 28px; }
 }
 
 footer.site { border-top: 1px solid var(--border); padding: 30px 0; color: var(--muted); font-size: 14px; }
+
+/* ---- parallax hero ------------------------------------------------------ */
+.phero {
+  position: relative; height: 100vh; min-height: 620px; max-height: 1040px;
+  overflow: hidden; background: #0b0710; isolation: isolate;
+}
+.phero-stage { position: absolute; inset: 0; z-index: 0; }
+/* layers are oversized + centred so parallax movement never exposes an edge */
+.phero .player {
+  position: absolute; top: 50%; left: 50%; width: 130%; height: 130%;
+  object-fit: cover; transform: translate3d(-50%, -50%, 0); will-change: transform;
+  pointer-events: none; user-select: none;
+}
+/* a subtle dark wash under the copy for legibility over bright sky */
+.phero::after {
+  content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background: radial-gradient(60% 55% at 50% 44%, rgba(0,0,0,.45), rgba(0,0,0,0) 70%);
+}
+.phero-copy {
+  position: absolute; z-index: 5; left: 0; right: 0; top: 45%;
+  transform: translateY(-50%); text-align: center; color: #fff;
+  padding: 0 var(--gap);
+}
+.phero-logo { width: 74px; height: 74px; margin: 0 0 12px;
+  filter: drop-shadow(0 8px 22px rgba(0,0,0,.55)); }
+.phero-copy h1 {
+  font-size: clamp(34px, 7vw, 74px); line-height: 1.02; margin: 0 0 12px;
+  letter-spacing: -0.02em; text-shadow: 0 2px 26px rgba(0,0,0,.55);
+}
+.phero-copy h1 .hl { color: #ff3ea5; }  /* flamingo magenta, like the mockup's "4" */
+.phero-copy .lead {
+  font-size: clamp(16px, 2.4vw, 22px); color: #f6eeff; max-width: 32ch;
+  margin: 0 auto 26px; text-shadow: 0 2px 16px rgba(0,0,0,.6);
+}
+.phero-copy .cta { margin: 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-magenta { background: #e5157f; color: #fff; }
+.btn-magenta:hover { background: #c20f6b; text-decoration: none; }
+.btn-glass {
+  background: rgba(255,255,255,.12); color: #fff;
+  border: 1px solid rgba(255,255,255,.4); backdrop-filter: blur(6px);
+}
+.btn-glass:hover { background: rgba(255,255,255,.22); text-decoration: none; }
+.phero-rail {
+  position: absolute; z-index: 5; left: 0; right: 0; bottom: 24px; margin: 0;
+  padding: 0 var(--gap); list-style: none; display: flex; justify-content: center;
+  gap: clamp(14px, 5vw, 56px); color: rgba(255,255,255,.92);
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+}
+.phero-rail li { text-shadow: 0 1px 10px rgba(0,0,0,.65); }
+@media (prefers-reduced-motion: reduce) {
+  .phero .player { transform: translate3d(-50%, -50%, 0) !important; }
+}
